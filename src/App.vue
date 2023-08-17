@@ -55,6 +55,10 @@
 
           <!-- 组件上默认是不能使用 Vue 提供的原生事件的，如果要使用需要加上 .native，否则还是会把 @xxx 当做一个叫作 xxx 的组件自定义事件来处理！-->
           <Student ref="student" @click.native="show" />
+          <myAnimate></myAnimate>
+          <testProxy></testProxy>
+          <githubSearch></githubSearch>
+          <slots></slots>
       </div>
   </div>
 </template>
@@ -69,14 +73,22 @@ import Student from './components/Student.vue';
 // 这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。
 // 推荐：如果找不到合适的多单词，可以在单词前面加上 项目名/业务名 前缀
 import TheSchool from './components/TheSchool';
-import todoList from './todoList'
+import todoList from './todoList';
+import myAnimate from './myAnimate';
+import testProxy from './components/testProxy'
+import githubSearch from './githubSearch'
+import slots from './slots'
 export default {
   name: 'App',
   components: {
     TheSchool,
     Teacher,
     Student,
-    todoList
+    todoList,
+    myAnimate,
+    testProxy,
+    githubSearch,
+    slots
   },
   data() {
     return {

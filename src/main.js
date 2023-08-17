@@ -57,7 +57,11 @@ new Vue({
   // components: {App}
 
   // render 函数的功能：将 App 组件放入容器中！
-  render: h => h(App)
+  render: h => h(App),
+  beforeCreate() {
+        // 安装全局事件总线
+        Vue.prototype.$bus = this;
+    }
   /*
     // 3 秒后销毁 vm 及子组件 vc 及其自定义事件（原生 DOM 事件不受影响）
     mounted() {
