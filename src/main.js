@@ -3,7 +3,7 @@
     至于为什么 main.js 是入口文件，那时因为 vue-cli 脚手架配置好的^^
 */
 // 引入 Vue
-import Vue from 'vue';
+import Vue from "vue";
 /* 
   import Vue from 'vue'; 所引入的 vue 并不是我们之前学习引入的 vue.js 文件！！！而是 vue.runtime.esm.js
     （vue.runtime.esm.js 位于 node_modules/vue/dist/ 下，里面有 vue 的完整版、压缩版、残缺版……）
@@ -31,10 +31,23 @@ import Vue from 'vue';
         vue.runtime.min.js          运行版的vue.runtime.min.js
 */
 // 引入 App 组件，它是所有组件的父组件
-import App from './App.vue';
+import App from "./App.vue";
 
 // 引入插件
-import plugins from './plugins/plugins';
+import plugins from "./plugins/plugins";
+
+// 引入store
+// 如果文件名为 index，那么不指定的情况下默认就是引入 index 文件
+import store from "./store";
+
+// 引入VueRouter
+// 安装：npm i vue-router@3  @3是vue2.0 vue-router现在默认vue3
+import VueRouter from 'vue-router';
+// 引入路由器（默认自动找到 index 文件）
+// 当页面路径出现 /#/ 就证明 vue-router 已经生效了！！！
+import router from './router';
+// 应用插件
+Vue.use(VueRouter);
 
 // 关闭 vue 的生产提示
 Vue.config.productionTip = false;
@@ -48,6 +61,65 @@ Vue.config.productionTip = false;
 // 写在 new Vue 前
 Vue.use(plugins, 1, 2, 3);
 
+// 安装文档：https://element.eleme.cn/#/zh-CN/component/installation
+// 引入文档：https://element.eleme.cn/#/zh-CN/component/quickstart
+
+// 完整引入 ElementUI 组件库
+// import ElementUI from 'element-ui';
+// 完整引入 ElementUI 全部样式
+// import 'element-ui/lib/theme-chalk/index.css';
+
+// ----------------------------------------------------------------
+
+// 按需引入
+// 第一步：需要在 .babelrc 中配置：
+/*
+{
+  "presets": [["es2015", { "modules": false }]],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+}
+*/
+// 注意：新版的 vue-cli 已经没有了 .babelrc 文件，应该在 babel.config.js 中配置：
+/*
+module.exports = {
+    presets: [
+        '@vue/cli-plugin-babel/preset',
+        ["@babel/preset-env", {"modules": false}]
+    ],
+    plugins: [
+        [
+            "component",
+            {
+                "libraryName": "element-ui",
+                "styleLibraryName": "theme-chalk"
+            }
+        ]
+    ]
+}
+*/
+
+// 第二步：单独引入需要的组件
+import { Button, Row, DatePicker } from 'element-ui';
+
+// 应用完整的 ElementUI
+// Vue.use(ElementUI);
+
+// 第三步：注册全局组件（按需应用 ElementUI）
+Vue.component(Button.name, Button);
+Vue.component(Row.name, Row);
+Vue.component(DatePicker.name, DatePicker);
+// 说明：Vue.component() 的第一个参数是可以自定义的，这里 Button.name 就是 ElementUI 提供的组件名 <el-button>
+//      我们可以自定义名称，比如 Vue.component(yyds-btn, Button)，那么组件就变成了 <yyds-btn>
+
+
 // 创建 Vue 实例对象：vm
 new Vue({
   // 可以将 .$mount() 改用 el，但是不推荐
@@ -57,11 +129,14 @@ new Vue({
   // components: {App}
 
   // render 函数的功能：将 App 组件放入容器中！
-  render: h => h(App),
+  render: (h) => h(App),
+  // key 与 value 相同，可以简写为 key
+  store,
+  router,
   beforeCreate() {
-        // 安装全局事件总线
-        Vue.prototype.$bus = this;
-    }
+    // 安装全局事件总线
+    Vue.prototype.$bus = this;
+  },
   /*
     // 3 秒后销毁 vm 及子组件 vc 及其自定义事件（原生 DOM 事件不受影响）
     mounted() {
@@ -70,7 +145,7 @@ new Vue({
 		}, 3000)
 	}
 	*/
-}).$mount('#app');
+}).$mount("#app");
 // 这里指定 id 为 app 的标签为容器
 // 容器位置：public index.html 中的 <div id="app"></div>
 // 至于为什么它知道容器在 public index.html 中，那时因为 vue-cli 脚手架配置好的^^

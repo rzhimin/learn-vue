@@ -12,7 +12,7 @@ import Test2 from './components/Test2';
 import Test3 from './components/Test3';
 
 export default {
-    name: 'animate',
+    name: 'myAnimate',
     components: { Test, Test2, Test3 }
 };
 </script>
