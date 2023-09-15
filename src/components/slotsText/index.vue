@@ -107,19 +107,19 @@
 </template>
 
 <script>
-import Category from "./components/Category";
+import Category from './components/Category'
 
 export default {
-  name: "slotsText",
+  name: 'slotsText',
   components: { Category },
   data() {
     return {
-      foods: ["火锅", "烧烤", "小龙虾", "牛排"],
-      games: ["红色警戒", "穿越火线", "劲舞团", "超级玛丽"],
-      films: ["《教父》", "《拆弹专家》", "《你好，李焕英》", "《尚硅谷》"],
-    };
+      foods: ['火锅', '烧烤', '小龙虾', '牛排'],
+      games: ['红色警戒', '穿越火线', '劲舞团', '超级玛丽'],
+      films: ['《教父》', '《拆弹专家》', '《你好，李焕英》', '《尚硅谷》'],
+    }
   },
-};
+}
 </script>
 
 <style scoped>

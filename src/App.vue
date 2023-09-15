@@ -127,23 +127,24 @@
 <script>
 // 引入组件
 // 关闭了语法检查,package.json里的eslintConfig['rule']配置下"vue/multi-word-component-names": "off"就可以用单个单词作为组件名了！
-import Teacher from "./components/Teacher.vue";
-import Student from "./components/Student.vue";
+import Teacher from './components/Teacher.vue'
+import Student from './components/Student.vue'
 // 如果没有在 vue.config.js 中关闭语法检查，那么 vue 默认强制组件的命名必须是多个单词，比如 School 及 Student 会报错！所以此处加了 The 前缀。
 // 组件名应该始终是多个单词的，根组件 App 以及 <transition>、<component> 之类的 Vue 内置组件除外。
 // 这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。
 // 推荐：如果找不到合适的多单词，可以在单词前面加上 项目名/业务名 前缀
-import TheSchool from "./components/TheSchool";
-import todoList from "./components/todoList";
-import myAnimate from "./components/myAnimate";
-import testProxy from "./components/testProxy";
-import githubSearch from "./components/githubSearch";
-import slotsText from "./components/slotsText";
-import vuexText from "./components/vuexText";
-import Banner from "./components/Banner";
-import validateTest from "./pages/validateTest";
+import TheSchool from './components/TheSchool'
+import todoList from './components/todoList'
+import myAnimate from './components/myAnimate'
+import testProxy from './components/testProxy'
+import githubSearch from './components/githubSearch'
+import slotsText from './components/slotsText'
+import vuexText from './components/vuexText'
+import Banner from './components/Banner'
+import validateTest from './pages/validateTest'
+
 export default {
-  name: "App",
+  name: 'App',
   components: {
     TheSchool,
     Teacher,
@@ -159,35 +160,35 @@ export default {
   },
   data() {
     return {
-      msg: "欢迎学习Vue！",
-      female: "女",
-      male: "男",
-      studentName: "",
-    };
+      msg: '欢迎学习Vue！',
+      female: '女',
+      male: '男',
+      studentName: '',
+    }
   },
   methods: {
     showDOM() {
-      console.log(this); // 这里的 this 是 vc (VueComponent)
-      console.log(this.$refs.title); // 真实 DOM 元素： <h1>欢迎学习Vue！</h1>
-      console.log(this.$refs.btn); // 真实 DOM 元素：<button>点我输出上方的 DOM 元素</button>
-      console.log(this.$refs.sch); // TheSchool 组件的实例对象（vc）
-      console.log(document.getElementById("sch")); // TheSchool 组件的真实 DOM 元素：<div class="school" id="sch"></div>
+      console.log(this) // 这里的 this 是 vc (VueComponent)
+      console.log(this.$refs.title) // 真实 DOM 元素： <h1>欢迎学习Vue！</h1>
+      console.log(this.$refs.btn) // 真实 DOM 元素：<button>点我输出上方的 DOM 元素</button>
+      console.log(this.$refs.sch) // TheSchool 组件的实例对象（vc）
+      console.log(document.getElementById('sch')) // TheSchool 组件的真实 DOM 元素：<div class="school" id="sch"></div>
     },
     getSchoolName(name) {
-      alert("App收到了学校名称：" + name);
+      alert('App收到了学校名称：' + name)
     },
     // 第一个参数作为 name 接收，其它所有的参数接收到 params 数组中
     getStudentName(name, ...params) {
-      alert("App收到了学生名称和剩余参数：" + name + " " + params);
-      this.studentName = name;
+      alert('App收到了学生名称和剩余参数：' + name + ' ' + params)
+      this.studentName = name
     },
     show() {
-      console.log("我被点击了！");
+      console.log('我被点击了！')
     },
   },
   mounted() {
     // 定义格式：this.$refs.xxx.$on('atguigu', 回调函数)    // xxx 是组件的 ref
-    this.$refs.student.$on("atguigu", this.getStudentName); // 绑定自定义事件
+    this.$refs.student.$on('atguigu', this.getStudentName) // 绑定自定义事件
     // this.$refs.student.$once('atguigu', this.getStudentName);   // 绑定自定义事件（一次性）
     // 除此之外，这种 ref 的写法还可以在这里实现另外非常多的逻辑，如延时器等
     // 注意：在使用该方式，绑定自定义事件时，回调要么配置在 methods 中，要么用箭头函数，否则 this 指向会出问题！
@@ -202,7 +203,7 @@ export default {
     //   this.studentName = name;  // 这里的 this 是 vc 而不是 vm !!!!!!!!
     // });
   },
-};
+}
 </script>
 
 <!--// 子组件中的样式最终都是合并到一块的！

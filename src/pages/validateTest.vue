@@ -2,10 +2,10 @@
   <div>
     <div class="userInfo">
       <h1>个人信息</h1>
-      <!-- 
+      <!--
         //绑定数据、绑定规则
-        //注意表单项的prop要和数据对应 
-    -->
+        //注意表单项的prop要和数据对应
+      -->
       <el-form
         :model="user"
         :rules="rules"
@@ -54,7 +54,17 @@
             style="resize: none"
           ></el-input>
         </el-form-item>
-
+        <div class="set">
+          <el-select v-model="value1" multiple placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </div>
         <div class="button">
           <el-button @click="reset()">重置</el-button>
           <el-button @click="save()" style="margin-left: 40px">保存</el-button>
@@ -65,13 +75,14 @@
 </template>
 
 <script>
-import { Input, Button, Form, FormItem } from "element-ui";
+import { Input, Button, Form, FormItem, Select } from "element-ui";
 export default {
   name: "updateUser",
   components: {
     "el-input": Input,
     "el-button": Button,
     "el-form": Form,
+    "el-select": Select,
     "el-form-item": FormItem,
   },
   data() {
@@ -123,6 +134,29 @@ export default {
         userEmail: [{ validator: checkEmail, trigger: "blur" }],
         phone: [{ validator: checkPhone, trigger: "blur" }],
       },
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎",
+        },
+        {
+          value: "选项4",
+          label: "龙须面",
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭",
+        },
+      ],
+      value1: [],
     };
   },
   mounted() {
