@@ -5,15 +5,16 @@
 > 构建工程（根据 package.json 及 package-lock.json 下载各种依赖包，还原或修复 node_modules 文件夹）
 
 ```
-npm install
+npm install/npm i
 ```
 
 ### Compiles and hot-reloads for development
 
 > 编译和热加载项目（开启一个本地服务器运行项目，同时提供热加载功能）
+> 可在package.json中进行配置
 
 ```
-npm run serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
