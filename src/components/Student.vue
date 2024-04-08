@@ -11,6 +11,7 @@
         <button @click="sendStudentlName">把学生名给App</button>
         <button @click="unbind">解绑atguigu事件</button>
         <button @click="death">销毁当前Student组件的实例(vc)</button>
+        <button @click="sendStudentNameToSchool">把学生名给School组件</button>
     </div>
 </template>
 
@@ -28,6 +29,9 @@ export default {
         };
     },
     methods: {
+        sendStudentNameToSchool () {
+            this.$bus.$emit('hello', this.name);
+        },
         updateAge() {
             // 修改 data 而不是修改 props
             this.myAge++;

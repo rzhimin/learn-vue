@@ -3,6 +3,16 @@
 module.exports = {
   // 自动为我们使用的 Vue 官方提供的 Babel 预设
   presets: [
-    '@vue/cli-plugin-babel/preset'
-  ]
+    '@vue/cli-plugin-babel/preset',
+    ["@babel/preset-env", {"modules": false}]
+  ],
+    plugins: [
+        [
+            "component",
+            {
+                "libraryName": "element-ui",
+                "styleLibraryName": "theme-chalk"
+            }
+        ]
+    ]
 }

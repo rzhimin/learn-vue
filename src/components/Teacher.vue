@@ -6,8 +6,7 @@
         <h2>老师性别: {{ sex }}</h2>
         <button @click="updateAge">年龄+1</button>
     </div>
-</template>
-
+</template> 
 <script>
 export default {
     name: 'Teacher',
