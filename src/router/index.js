@@ -155,8 +155,8 @@ const router = new VueRouter({
 // 后置路由守卫没有 next()
 router.afterEach((to, from) => {
     console.log('后置路由守卫', to, from);
-    // 有路由标题就用路由标题，没有标题就用'硅谷系统'
-    document.title = to.meta.title || '硅谷系统';
+    // 有路由标题就用路由标题，没有标题就用'前端系统'
+    document.title = to.meta.title || '前端系统';
 });
 // 注意：在全局后置路由守卫中设置浏览器选项卡标题会有一个小问题，
 // 那就是对于根页面而言，当页面打开的一瞬间显示的是之前 index.html 中配置的 title 之后才会显示路由的 title

@@ -18,6 +18,7 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 'latest',
+    requireConfigFile: false, //禁用对 Babel 配置文件的检查
     parser: '@babel/eslint-parser',
   },
   //env 用于指定代码运行的环境。在不同的运行环境下，JavaScript 中可用的全局变量可能会不同，使用 env 可以让 ESLint 知道当前代码运行的环境，从而正确地识别全局变量，避免误报未定义变量等问题。

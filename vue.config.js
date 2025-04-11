@@ -5,12 +5,16 @@
  * 参考文档：https://cli.vuejs.org/zh/config/
  */
 const { defineConfig } = require("@vue/cli-service");
+
 module.exports = defineConfig({
-  // 默认情况下 babel-loader 会忽略所有 node_modules 中的文件。你可以启用本选项，以避免构建后的代码中出现未转译的第三方依赖
-  transpileDependencies: true,
+  // 开启此选项会让 Babel 对 node_modules 中的文件进行转译，这会增加构建时间。通常只有在第三方依赖使用了较新的 JavaScript 特性，而目标环境不支持时，才需要开启。若项目使用的第三方依赖都能被目标环境支持，可将其设置为 false 以提升构建速度。
+  transpileDependencies: false,
+
   // 是否开启语法检测（这是使用 ESLint 推荐规范来规范代码编写，一般情况下我们是关闭的！虽然开启后能让我们的代码质量大大提高，但是对于学习阶段不太熟悉 ESLint 规则的人来说，开启之后警告和报错太多了！）
   // 在实际团队开发中，语法检测更多的是使用所在团队制定的 ESLint 规范，而不是直接采用默认推荐规范！
   lintOnSave: false,
+
+  // 设置代理服务器
   // 注意：配置了代理服务器后，前端中的请求地址就要同步改变（比如之前请求 127.0.0.1:5001，现在要请求 127.0.0.1:8080（前端地址及端口，因为代理服务器也在这个地址及端口上）！
   // 注意：代理服务器只会转发本地没有的资源，要是 public 目录内有的资源就会直接返回（public 目录相当于代理服务器的根目录）
   // 注意：例如 127.0.0.1:8080/test，如果刚好 public 内有 test 文件，那么请求不会走代理服务器，而是会直接返回本地文件！所以我们最好为代理服务器配置前缀！（后面讲）
@@ -33,7 +37,7 @@ module.exports = defineConfig({
       // /atguigu：请求前缀
       "/atguigu": {
         target: "http://localhost:5001",
-        pathRewrite: { "^/atguigu": "" }, // 在正式发送请求时去掉前缀（正则表达式匹配替换为空字符串）
+        pathRewrite: { "^/atguigu": "" }, // 在正式发送请求时去掉前缀（正则表达式匹配 将之替换为空字符串）
         // ws: true,                     // 用于支持 websocket
         // changeOrigin: true            // 用于控制请求头中的 host 值（当为 true 时，代理服务器会将自己的 host 设置为与请求服务器相同的 host，以确保不会被请求服务器怀疑为跨域代理的身份）
         // 这里对 changeOrigin 解释一下：
@@ -50,21 +54,4 @@ module.exports = defineConfig({
       },
     },
   },
-
-  /*
-    配置举例：
-    pages: {
-        index: {
-            // 这里可以写一条到多条配置，但是不能为空，为空时就认为全部配置项都为空！会直接报错！
-            // 入口文件
-            entry: 'src/main.js',
-            // 模板来源
-            template: 'public/index.html',
-            // 打包项目时，在 dist 中 html 文件的文件名
-            filename: 'index.html',
-            // 浏览器页签标题，当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-            title: 'hello-world'
-        }
-    }
-    */
 });

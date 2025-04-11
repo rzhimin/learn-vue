@@ -1,4 +1,4 @@
-# learn (项目名称)
+# learn-vue (项目名称)
 
 ## Project setup
 
