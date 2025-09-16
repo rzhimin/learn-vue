@@ -11,10 +11,10 @@ export default {
     beforeRouteEnter(to, from, next) {
         console.log('About--beforeRouteEnter', to, from);
         if (to.meta.isAuth) {
-            if (localStorage.getItem('school') === 'atguigu') {
+            if (localStorage.getItem('hasAuth')) {
                 next();
             } else {
-                alert('学校名不对，无权限查看！');
+                alert('无权限查看！');
             }
         } else {
             next();

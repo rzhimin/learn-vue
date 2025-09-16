@@ -1,6 +1,6 @@
 /*
   该文件是整个项目的入口文件，当我们执行了 npm run dev 之后直接就会运行该文件！
-    至于为什么 main.js 是入口文件，那时因为 vue-cli 脚手架配置好的^^
+  至于为什么 main.js 是入口文件，那时因为 vue-cli 脚手架配置好的^^
 */
 // 引入 Vue
 import Vue from 'vue'
@@ -33,6 +33,7 @@ import Vue from 'vue'
 */
 //#endregion
 
+
 // 引入 App 组件，它是所有组件的父组件
 import App from './App.vue'
 
@@ -43,7 +44,7 @@ import plugins from './plugins/plugins'
 import store from './store'
 
 // 引入VueRouter
-// 安装：npm i vue-router@3  @3是vue2.0 vue-router现在默认vue3
+// 安装：npm i vue-router@3  @3是vue2.0安装指令， 现在npm install vue-router默认支持vue3版本
 import VueRouter from 'vue-router'
 
 // 引入路由器
@@ -111,14 +112,15 @@ module.exports = {
 }
 */
 // 第二步：单独引入需要的组件
-import { Button, Row, DatePicker } from 'element-ui'
+import { Button, Row, Col, DatePicker } from 'element-ui'
 
 // 第三步：注册全局组件（按需应用 ElementUI）
 Vue.component(Button.name, Button)
 Vue.component(Row.name, Row)
+Vue.component(Col.name, Col)
 Vue.component(DatePicker.name, DatePicker)
 // 说明：Vue.component() 的第一个参数是可以自定义的，这里 Button.name 就是 ElementUI 提供的组件名 <el-button>
-//      我们可以自定义名称，比如 Vue.component(yyds-btn, Button)，那么组件就变成了 <yyds-btn>
+// 我们可以自定义名称，比如 Vue.component(yyds-btn, Button)，那么组件就变成了 <yyds-btn>
 
 // ----------------------------------------------------------------
 //#endregion

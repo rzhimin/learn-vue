@@ -13,12 +13,11 @@
 import axios from 'axios';
 
 export default {
-    name: 'App',
+    name: 'TestProxy',
     methods: {
         getStudents () {
-            // 端口应从 5001 改为 8080
-            // 不加前缀表示不走代理
-            axios.get('http://localhost:8080/students').then(
+            // 不走代理
+            axios.get('http://localhost:5001/students').then(
                 response => {
                     console.log('请求成功了', response.data);
                 },
@@ -28,8 +27,7 @@ export default {
             );
         },
         getCars () {
-            // 端口应从 5002 改为 8080
-            // 加了前缀表示一定走代理
+            // 代理后 端口应从 5002 改为 8080
             axios.get('http://localhost:8080/demo/cars').then(
                 response => {
                     console.log('请求成功了', response.data);

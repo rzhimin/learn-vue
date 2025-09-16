@@ -53,7 +53,7 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
-    //意思就是不让eslint校验我定义有没有用了。
+    // 意思就是不让eslint校验我定义有没有用了。
     'no-unused-vars': 0,
     // 关闭函数名后面必须有空格的验证
     'space-before-function-paren': 0,

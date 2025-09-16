@@ -1,18 +1,19 @@
-<!-- 文档类型声明 表示当前文档是 HTML5 文档 了解-->
+<!-- 文档类型声明 表示当前文档是 HTML5 文档-->
 <!DOCTYPE html>
-<!-- lang属性 用于声明网页或部分网页的语言 了解-->
+<!-- lang属性 用于声明网页或部分网页的语言-->
 <html lang="zh-CN">
 
 <head>
-  <!-- 字符编码设置 了解 -->
-  <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 老的 HTML 版本写法-->
-  <meta charset="utf-8" />
+  <!-- 字符编码设置 -->
+  <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> html5之前的老写法-->
+  <meta charset="UTF-8" />
   <!-- 模拟了 HTTP 响应头的行为，让 IE 浏览器以最高的渲染级别渲染页面（注：Vue 不支持 IE8 及以下版本） -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- 优化网页在移动设备上的显示效果，将视口的宽度设置为设备的实际屏幕宽度，初始缩放比例为 1.0 -->
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0, user-scalable=0,viewport-fit=cover" />
-  <!-- 配置网站图标 -->
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico" type="image/x-icon"/>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=0,viewport-fit=cover" />
+  <!-- 配置网站图标 --> <!--<%= BASE_URL %>构建时 webpack 会把它替换成 publicPath 的值（默认 '/'）-->
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico" type="image/x-icon" />
   <!-- 引入第三方样式 bootstrap.css -->
   <link rel="stylesheet" href="<%= BASE_URL %>css/bootstrap.css" />
   <!-- 配置网页标题 -->
@@ -23,7 +24,7 @@
   <!--当浏览器不支持 JavaScript 或者用户禁用了 JavaScript 时，显示 <noscript> 标签内的内容。-->
   <noscript>
     <strong>We're sorry but doesn't work properly without JavaScript enabled.
-        Please enable it to continue.</strong>
+      Please enable it to continue.</strong>
   </noscript>
   <!-- 这个 <div> 通常作为应用的根容器。框架会将生成的 HTML 内容挂载到这个容器中。 -->
   <div id="app"></div>

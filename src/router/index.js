@@ -1,11 +1,12 @@
 // 该文件专门用于创建整个应用的路由器
 import VueRouter from "vue-router";
+
 // 引入组件
-import About from "../pages/About";
-import Home from "../pages/Home";
-import News from "../pages/News";
-import Message from "../pages/Message";
-import Detail from "../pages/Detail";
+import About from "@/views/About";
+import Home from "@/views/Home";
+import News from "@/views/News";
+import Message from "@/views/Message";
+import Detail from "@/views/Detail";
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
@@ -20,7 +21,7 @@ const router = new VueRouter({
         1. 地址干净，美观 。
         2. 兼容性和 hash 模式相比略差。
         3. 应用部署上线时需要后端人员支持，解决刷新页面服务端 404 的问题（如果 vue 项目部署在 nginx 之类的静态服务器中，也可以对 nginx 配置来解决该问题）
-        4. history 在正式上线的项目中应用得更多！！！
+        4. history 在正式上线的项目中应用较多
      */
   // 设置路由为 history 模式
   mode: "history",
@@ -53,19 +54,19 @@ const router = new VueRouter({
           meta: { isAuth: true, title: "新闻" },
           // 独享路由守卫（单独给某一个路由组件设置守卫）
           // 独享路由守卫只有前置没有后置！！！
-          // beforeEnter: (to, from, next) => {
-          //   console.log("独享路由守卫", to, from);
-          //   if (to.meta.isAuth) {
-          //     // 判断是否需要鉴权
-          //     if (localStorage.getItem("school") === "atguigu") {
-          //       next();
-          //     } else {
-          //       alert("学校名不对，无权限查看！");
-          //     }
-          //   } else {
-          //     next();
-          //   }
-          // },
+          beforeEnter: (to, from, next) => {
+            console.log("独享路由守卫", to, from);
+            if (to.meta.isAuth) {
+              // 判断是否需要鉴权
+              if (localStorage.getItem("hasAuth")) {
+                next();
+              } else {
+                alert("无权限查看！");
+              }
+            } else {
+              next();
+            }
+          },
         },
         {
           name: "xiaoxi",
@@ -130,36 +131,31 @@ const router = new VueRouter({
 // 在 export default router 之前配置路由守卫
 
 // 全局前置路由守卫 ———— 初始化的时候被调用、每次路由切换之前被调用（对所有路由均有效）
-// router.beforeEach((to, from, next) => {
-//     // to 对象包含要去的目的地的信息（fullPath、path、name、meta、params、query 等）
-//     // from 对象包含初始地的信息（fullPath、path、name、meta、params、query 等）
-//     // next() 执行放行的函数
-//     // 有了 to from next() 我们就可以通过代码逻辑对路由的切换进行权限控制，比如：判断 to.path 并执行逻辑、判断 to.name 并执行逻辑等等
-//     console.log('前置路由守卫', to, from);
-//     // 判断该路由组件是否需要鉴权（meta.isAuth 属性是否为 true）
-//     if (to.meta.isAuth) {
-//         // 判断浏览器 localStorage 是否有：school: atguigu
-//         if (localStorage.getItem('school') === 'atguigu') {
-//             // 放行
-//             next();
-//         } else {
-//             alert('学校名不对，无权限查看！');
-//         }
-//     } else {
-//         // 放行（不需要校验权限）
-//         next();
-//     }
-// });
+router.beforeEach((to, from, next) => {
+  // to 对象包含要去的目的地的信息（fullPath、path、name、meta、params、query 等）
+  // from 对象包含初始地的信息（fullPath、path、name、meta、params、query 等）
+  // next() 执行放行的函数
+  // 有了 to from next() 我们就可以通过代码逻辑对路由的切换进行权限控制，比如：判断 to.path 并执行逻辑、判断 to.name 并执行逻辑等等
+  console.log('前置路由守卫', to, from);
+  // 判断该路由组件是否需要鉴权（meta.isAuth 属性是否为 true）
+  if (to.meta.isAuth) {
+    // 判断浏览器 localStorage 是否有：hasAuth: true  *先放行*
+    if (localStorage.getItem('hasAuth') || true) {
+      // 放行
+      next();
+    } else {
+      alert('无权限查看！');
+    }
+  } else {
+    // 放行（不需要校验权限）
+    next();
+  }
+});
 
 // 全局后置路由守卫 ———— 初始化的时候被调用、每次路由切换成功之后被调用（主要用于设置浏览器选项卡标题）
 // 后置路由守卫没有 next()
 router.afterEach((to, from) => {
-    console.log('后置路由守卫', to, from);
-    // 有路由标题就用路由标题，没有标题就用'前端系统'
-    document.title = to.meta.title || '前端系统';
+  console.log('后置路由守卫', to, from);
 });
-// 注意：在全局后置路由守卫中设置浏览器选项卡标题会有一个小问题，
-// 那就是对于根页面而言，当页面打开的一瞬间显示的是之前 index.html 中配置的 title 之后才会显示路由的 title
-// 所以，推荐去手动修改一下 index.html 中的标题，或者配置一下 vue.config.js 中的 pages -> index -> title 选项
 
 export default router;
