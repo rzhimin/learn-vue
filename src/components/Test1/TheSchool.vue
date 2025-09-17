@@ -2,15 +2,16 @@
   <div class="school">
     <h3>学校名称：{{ name }}</h3>
     <h3>学校地址：{{ address }}</h3>
-    <h3>组件 data 数据的优先级更高: {{ x }}</h3>
-    <button @click="test">测试混入的优先级</button>
+    <h3>混入测试</h3>
+    <h3>混入data数据：组件 data 数据的优先级更高: {{ x }}</h3>
+    <button @click="test">测试混入方法的优先级</button>
 		<!-- 有传入getSchoolName这个方法才显示 -->
     <button v-if="showSchoolNameButton" @click="sendSchoolName">把学校名给App</button>
   </div>
 </template>
 
 <script>
-import { hunhe, hunhe2 } from '../mixins/01'
+import { minxin1, minxin2 } from '../../mixins/01'
 export default {
   name: 'TheSchool',
 	props: {
@@ -20,7 +21,7 @@ export default {
     }
   },
 	// 局部混入
-  mixins: [hunhe, hunhe2],
+  mixins: [minxin1, minxin2],
   data() {
     return {
       name: '北大',
@@ -38,7 +39,7 @@ export default {
     },
   },
   mounted() {
-    console.log('mixin里的周期比我先调用，我后调用')
+    console.log('混入了mounted，混入里的先调用，我后调用')
     // 全局事件总线
     // 回调要么在 methods 中，要么使用箭头函数！
     this.$bus.$on('hello', (data) => {

@@ -12,7 +12,7 @@ export default {
   name: 'Teacher',
   data() {
     return {
-			// 一般不采用下列方式，了解
+			// 一般不采用下列方式，仅了解
       // 通过 data 数据来接收
       // $attrs 内的属性不会出现在 this 上，所以可以同名（age）
       // 注意，props 与 $attrs 最好不要混用，因为 props 接收了的 $attrs 中就不接收了，$attrs 只接收 props 没有接收完的

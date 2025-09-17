@@ -17,7 +17,7 @@ module.exports = {
   // jsx - 启用 JSX
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 'latest',
+    ecmaVersion: '2018',
     requireConfigFile: false, //禁用对 Babel 配置文件的检查
     parser: '@babel/eslint-parser',
   },
@@ -35,7 +35,7 @@ module.exports = {
   },
   //用于引入继承其他配置包中配置，然后通过合并/覆盖所有原本的配置生成最终的规则（extends可以看做是集成多个配置方案的方式，配置的内容实际就是配置好的.eslintrc.js，不然对于每一个项目都要重新一步步开始选择配置规则就比较显得不太人性）。
   //'plugin:vue/vue3-essential' vue3的
-  extends: ['plugin:vue/essential', 'eslint:recommended'],
+  extends: ['plugin:vue/recommended', 'eslint:recommended'],
   // required to lint *.vue files
   // 此项是用来提供插件的，插件名称省略了eslint-plugin-，
   plugins: ['vue'],
@@ -65,5 +65,6 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     // 允许行尾分号
     semi: 0,
+    'no-constant-condition': 0, // 禁用 no-constant-condition 规则
   },
 }

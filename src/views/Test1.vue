@@ -1,6 +1,6 @@
 <template>
   <div class="test1">
-    <img src="./assets/logo.png" alt="logo" />
+
     <!-- ref 属性： -->
     <!-- 1. 被用来给元素或子组件注册引用信息（id 的替代者） -->
     <!-- 2. 应用在 html 标签上获取的是真实 DOM 元素，应用在组件标签上是组件实例对象（vc） -->
@@ -9,6 +9,7 @@
     <!-- 3-2. 获取：this.$refs.xxx -->
     <h1 ref="title" class="title" v-text="msg"></h1>
     <button ref="btn" @click="showDOM">点我输出ref的 DOM 元素</button>
+
     <!-- 父组件可以在调用子组件时传递值给子组件，在子组件内用 props 配置项接收 -->
     <!--
       不加冒号，那么默认传递的都是字符串格式，
@@ -16,6 +17,7 @@
     -->
     <!-- 子组件通过调用父组件传递的函数（作为prop）直接修改父组件状态 -->
     <TheSchool ref="sch" id="sch" :getSchoolName="getSchoolName"></TheSchool>
+
     <!-- 使用 @ 或 v-on 添加自定义事件，也可以在mounted中通过this.$refs.xxx.$on('atguigu', 回调函数)  -->
     <!-- 组件上默认是不能使用 Vue 提供的原生事件的，如果要使用需要加上 .native，否则还是会把 @xxx 当做一个叫作 xxx 的组件自定义事件来处理！ -->
     <Student
@@ -24,18 +26,18 @@
       :sex="female"
       :age="18"
       @getStudentName="getStudentName"
-      @click.native="show"
+      @click.native="showClickMessage"
     />
     <Teacher name="语文老师" :sex="male" :age="50" />
-    <h1>{{ msg }}，学生姓名是：{{ studentName }}</h1>
+    <h1>学生姓名是：{{ studentName }}</h1>
   </div>
 </template>
 
 <script>
 // 引入组件
-import Teacher from './components/Teacher'
-import Student from './components/Student'
-import TheSchool from './components/TheSchool'
+import Teacher from '@/components/Test1/Teacher'
+import Student from '@/components/Test1/Student'
+import TheSchool from '@/components/Test1/TheSchool'
 
 export default {
   name: 'Test1',
@@ -46,7 +48,7 @@ export default {
   },
   data() {
     return {
-      msg: '欢迎学习Vue！',
+      msg: '基础学习',
       female: '女',
       male: '男',
       studentName: '',
@@ -68,7 +70,7 @@ export default {
       alert('App收到了学生名称和剩余参数：' + name + ' ' + rest)
       this.studentName = name
     },
-    show() {
+    showClickMessage() {
       console.log('我被点击了！')
     },
   },

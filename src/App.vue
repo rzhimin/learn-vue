@@ -15,10 +15,22 @@
           active-class="active"
           :to="{ name: 'guanyu' }"
         >
-          About
+          简介
         </router-link>
         <router-link class="list-group-item" active-class="active" to="/home">
-          Home
+          主页
+        </router-link>
+        <router-link class="list-group-item" active-class="active" to="/test1">
+          Test1
+        </router-link>
+        <router-link class="list-group-item" active-class="active" to="/test2">
+          elementUI示例
+        </router-link>
+        <router-link class="list-group-item" active-class="active" to="/validateTest">
+          ValidateTest
+        </router-link>
+        <router-link class="list-group-item" active-class="active" to="/login">
+          登录
         </router-link>
       </div>
     </div>

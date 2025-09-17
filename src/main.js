@@ -3,8 +3,8 @@
   至于为什么 main.js 是入口文件，那时因为 vue-cli 脚手架配置好的^^
 */
 // 引入 Vue
-import Vue from 'vue'
-//#region 
+import Vue from "vue";
+//#region
 /*
   import Vue from 'vue'; 所引入的 vue 并不是我们之前学习引入的 vue.js 文件！！！而是 vue.runtime.esm.js
   （vue.runtime.esm.js 位于 node_modules/vue/dist/ 下，里面有 vue 的完整版、压缩版、残缺版……）
@@ -33,36 +33,34 @@ import Vue from 'vue'
 */
 //#endregion
 
-
 // 引入 App 组件，它是所有组件的父组件
-import App from './App.vue'
+import App from "./App.vue";
 
 // 引入插件
-import plugins from './plugins/plugins'
+import plugins from "./plugins/plugins";
 
 // 引入store
-import store from './store'
+import store from "./store";
 
 // 引入VueRouter
 // 安装：npm i vue-router@3  @3是vue2.0安装指令， 现在npm install vue-router默认支持vue3版本
-import VueRouter from 'vue-router'
+import VueRouter from "vue-router";
 
 // 引入路由器
 // 当页面路径出现 /#/ 就证明 vue-router 已经生效了！！！
-import router from './router'
-
+import router from "./router";
 
 // 应用插件
-Vue.use(VueRouter)
-Vue.use(plugins, 1, 2, 3)
+Vue.use(VueRouter);
+Vue.use(plugins, 1, 2, 3);
 
-Vue.prototype.$bus = new Vue()
+Vue.prototype.$bus = new Vue();
 
 // 关闭 vue 的生产提示
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 // element引入
-//#region 
+//#region
 // 安装文档：https://element.eleme.cn/#/zh-CN/component/installation
 // 引入文档：https://element.eleme.cn/#/zh-CN/component/quickstart
 
@@ -112,13 +110,34 @@ module.exports = {
 }
 */
 // 第二步：单独引入需要的组件
-import { Button, Row, Col, DatePicker } from 'element-ui'
+import {
+  Button,
+  Row,
+  Col,
+  DatePicker,
+  Form,
+  Upload,
+  Input,
+  Select,
+  FormItem,
+  Option,
+  Message,
+  Card
+} from "element-ui";
 
 // 第三步：注册全局组件（按需应用 ElementUI）
-Vue.component(Button.name, Button)
-Vue.component(Row.name, Row)
-Vue.component(Col.name, Col)
-Vue.component(DatePicker.name, DatePicker)
+Vue.use(Button);
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(DatePicker);
+Vue.use(Form);
+Vue.use(Upload);
+Vue.use(Input);
+Vue.use(Select);
+Vue.use(FormItem);
+Vue.use(Option);
+Vue.use(Card);
+Vue.prototype.$message = Message;
 // 说明：Vue.component() 的第一个参数是可以自定义的，这里 Button.name 就是 ElementUI 提供的组件名 <el-button>
 // 我们可以自定义名称，比如 Vue.component(yyds-btn, Button)，那么组件就变成了 <yyds-btn>
 
@@ -143,7 +162,7 @@ new Vue({
   router,
   // render 函数的功能：将 App 组件放入容器中！
   render: (h) => h(App),
-}).$mount('#app')
+}).$mount("#app");
 // 这里指定 id 为 app 的标签为容器
 // 容器位置：public index.html 中的 <div id="app"></div>
 // 至于为什么它知道容器在 public index.html 中，那时因为 vue-cli 脚手架配置好的^^

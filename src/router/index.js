@@ -7,6 +7,10 @@ import Home from "@/views/Home";
 import News from "@/views/News";
 import Message from "@/views/Message";
 import Detail from "@/views/Detail";
+import Test1 from "@/views/Test1";
+import Test2 from "@/views/Test2";
+import ValidateTest from "@/views/ValidateTest";
+import Login from "@/views/Login";
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
@@ -32,13 +36,13 @@ const router = new VueRouter({
       path: "/about",
       component: About,
       // meta 属性用于标识该路由的元信息
-      // 我们可以往 meta 上添加一个 isAuth 属性用于标记该路由是否需要权限校验
-      // 注意：isAuth 是我们往 meta 对象上自己添加的，名字随便取，不是原生提供的！
+      // 我们可以往 meta 上添加一个 needAuth 属性用于标记该路由是否需要权限校验
+      // 注意：needAuth 是我们往 meta 对象上自己添加的，名字随便取，不是原生提供的！
       // 我们也可以往 meta 上添加一个 title 属性，标识路由的标题
       // meta 中还可以添加各种各样的属性，关键看你的业务逻辑……
-      // meta: {isAuth: false, title: '关于'}
-      // isAuth 为 false，可以直接不写，因为 if 判断中 undefined 会判断为 false
-      meta: { title: "关于" },
+      // meta: {needAuth: false, title: '关于'}
+      // needAuth 为 false，可以直接不写，因为 if 判断中 undefined 会判断为 false
+      meta: { title: "关于", },
     },
     {
       name: "zhuye",
@@ -51,12 +55,12 @@ const router = new VueRouter({
           path: "news",
           component: News,
           // 需要权限校验
-          meta: { isAuth: true, title: "新闻" },
+          meta: { needAuth: true, title: "新闻" },
           // 独享路由守卫（单独给某一个路由组件设置守卫）
           // 独享路由守卫只有前置没有后置！！！
           beforeEnter: (to, from, next) => {
             console.log("独享路由守卫", to, from);
-            if (to.meta.isAuth) {
+            if (to.meta.needAuth) {
               // 判断是否需要鉴权
               if (localStorage.getItem("hasAuth")) {
                 next();
@@ -73,7 +77,7 @@ const router = new VueRouter({
           path: "message",
           component: Message,
           // 需要权限校验
-          meta: { isAuth: true, title: "消息" },
+          meta: { needAuth: true, title: "消息" },
           children: [
             {
               // 利用 name 设置路由名称
@@ -83,7 +87,7 @@ const router = new VueRouter({
               // path: "detail/:id/:title",
               component: Detail,
               // 需要权限校验
-              meta: { isAuth: true, title: "详情" },
+              meta: { needAuth: true, title: "详情" },
               // 路由的 props 配置，作用：让路由组件更方便地收到参数
 
               // props 的第一种写法，值为对象，该对象中的所有 key-value 都会以 props 的形式传给 Detail 组件。
@@ -124,6 +128,22 @@ const router = new VueRouter({
         },
       ],
     },
+    {
+      path: "/test1",
+      component: Test1,
+    },
+    {
+      path: "/test2",
+      component: Test2,
+    },
+    {
+      path: "/validateTest",
+      component: ValidateTest,
+    },
+    {
+      path: "/login",
+      component: Login,
+    },
   ],
 });
 
@@ -137,8 +157,8 @@ router.beforeEach((to, from, next) => {
   // next() 执行放行的函数
   // 有了 to from next() 我们就可以通过代码逻辑对路由的切换进行权限控制，比如：判断 to.path 并执行逻辑、判断 to.name 并执行逻辑等等
   console.log('前置路由守卫', to, from);
-  // 判断该路由组件是否需要鉴权（meta.isAuth 属性是否为 true）
-  if (to.meta.isAuth) {
+  // 判断该路由组件是否需要鉴权（meta.needAuth 属性是否为 true）
+  if (to.meta.needAuth) {
     // 判断浏览器 localStorage 是否有：hasAuth: true  *先放行*
     if (localStorage.getItem('hasAuth') || true) {
       // 放行
