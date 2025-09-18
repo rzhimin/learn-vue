@@ -122,7 +122,9 @@ import {
   FormItem,
   Option,
   Message,
-  Card
+  Card,
+  Checkbox,
+  Link
 } from "element-ui";
 
 // 第三步：注册全局组件（按需应用 ElementUI）
@@ -137,6 +139,8 @@ Vue.use(Select);
 Vue.use(FormItem);
 Vue.use(Option);
 Vue.use(Card);
+Vue.use(Checkbox);
+Vue.use(Link);
 Vue.prototype.$message = Message;
 // 说明：Vue.component() 的第一个参数是可以自定义的，这里 Button.name 就是 ElementUI 提供的组件名 <el-button>
 // 我们可以自定义名称，比如 Vue.component(yyds-btn, Button)，那么组件就变成了 <yyds-btn>
