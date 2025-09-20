@@ -2,7 +2,7 @@
   <div>
     <h2>简介的内容</h2>
     <img src="@/assets/logo.png" alt="logo" />
-    <h1 v-text="msg"></h1>
+    <h1>欢迎学习vue2</h1>
   </div>
 </template>
 
@@ -10,9 +10,7 @@
 export default {
   name: "About",
   data() {
-    return {
-      msg: '欢迎学习Vue！',
-    }
+    return {};
   },
   // 组件内路由守卫（只对该组件生效）
 
@@ -28,6 +26,14 @@ export default {
     } else {
       next();
     }
+  },
+
+  //当一个组件复用时,传递的参数 发生变化就会触发这个钩子函数
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
   },
 
   // 通过路由规则，离开该组件时被调用
