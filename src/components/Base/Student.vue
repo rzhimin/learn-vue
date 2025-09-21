@@ -1,17 +1,15 @@
 <template>
   <div class="demo">
-    <h1>{{ msg }} </h1>
+    <h1>{{ msg }}</h1>
     <h2 class="title">学生姓名：{{ name }}</h2>
     <h2>学生性别：{{ sex }}</h2>
     <!-- 这里 myAge 一定得是数值类型，否则 + 1 处理就会出错 -->
     <h2 class="fs20">学生年龄：{{ myAge + 1 }}</h2>
     <button @click="addAge">年龄+1</button>
-    <h2>当前求和为：{{ number }}</h2>
-    <button @click="addNumber">点我number++</button>
     <br />
     <button @click="sendStudentNameToApp">测试自定义事件：把学生名给App</button>
     <button @click="sendStudentNameToSchool">
-      测试全局事件总线：把学生名给School组件
+      测试全局事件总线：把学生名给TheSchool组件
     </button>
     <button @click="unbind">解绑getStudentName事件</button>
     <button @click="death">销毁当前Student组件的实例(vc)</button>
@@ -22,31 +20,6 @@
 export default {
   name: "Student",
   //#region
-  // -----------------------------------------------------------------------
-  // props接收参数
-  // 1.简单声明接收
-  //    props:['name', 'age', 'sex']
-  // 2.接收的同时对数据进行类型限制,
-  // 类型不对时还是会接收，但是会在控制台报错！（所以对于有类型限制的，要用:绑定）
-  /*    props:{
-            name: String,
-            age: Number,
-            sex: String
-          }
-    */
-  // 3.接收的同时对数据进行：类型限制 + 默认值的指定 + 必要性的限制
-  //   类型不对时还是会接收，但是会在控制台报错！（所以对于有类型限制的，在父组件传值时要用:绑定）
-  /* props: {
-          name: {
-            type: String,
-            required: true // 必须要传的
-          },
-          age: {
-            type: Number,
-            default: 18,
-          }
-        }, 
-    */
   // 特别注意：
   // props 所接收到的值并不是源数据的副本，而是源数据的引用值，即：源数据变化的同时 props 数据也会变化
   // 所以，其实我们修改 props 中的数据，源数据也是在同步变化的，只不过 Vue 禁止了这种做法（会报错且没效果）！！！
@@ -84,7 +57,6 @@ export default {
       // 若业务需求确实需要修改，那么请复制 props 的内容到 data 中一份，然后去修改 data 中的数据（props 中的数据会去到 vc 上）
       // data 中的数据不要与 props 中得数据重名（因为 props 中的数据会去到 vc 上，而 vue 优先使用 props）
       myAge: this.age,
-      number: 0,
     };
   },
   methods: {
@@ -108,9 +80,6 @@ export default {
     sendStudentNameToApp() {
       // 触发 Student 组件实例身上的 getStudentName 事件，同时传递参数
       this.$emit("getStudentName", this.name, 666, 888, 999);
-    },
-    addNumber() {
-      this.number++;
     },
     addAge() {
       // 修改 data 而不是修改 props

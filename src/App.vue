@@ -17,16 +17,34 @@
         >
           简介
         </router-link>
+        <router-link class="list-group-item" active-class="active" to="/base">
+          基础
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/proxyTest"
+        >
+          代理测试
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/myAnimate"
+        >
+          动画测试
+        </router-link>
         <router-link class="list-group-item" active-class="active" to="/home">
           主页
-        </router-link>
-        <router-link class="list-group-item" active-class="active" to="/test1">
-          Test1
         </router-link>
         <router-link class="list-group-item" active-class="active" to="/test2">
           elementUI示例
         </router-link>
-        <router-link class="list-group-item" active-class="active" to="/validateTest">
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/validateTest"
+        >
           ValidateTest
         </router-link>
         <router-link class="list-group-item" active-class="active" to="/login">

@@ -7,7 +7,9 @@ import Home from "@/views/Home";
 import News from "@/views/News";
 import Message from "@/views/Message";
 import Detail from "@/views/Detail";
-import Test1 from "@/views/Test1";
+import Base from "@/views/Base";
+import ProxyTest from "@/views/ProxyTest";
+import MyAnimate from "@/components/myAnimate";
 import Test2 from "@/views/Test2";
 import ValidateTest from "@/views/ValidateTest";
 import Login from "@/views/Login";
@@ -129,8 +131,16 @@ const router = new VueRouter({
       ],
     },
     {
-      path: "/test1",
-      component: Test1,
+      path: "/base",
+      component: Base,
+    },
+    {
+      path: "/proxyTest",
+      component: ProxyTest,
+    },
+    {
+      path: "/myAnimate",
+      component: MyAnimate,
     },
     {
       path: "/test2",

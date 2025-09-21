@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h2>简介的内容</h2>
+    <h2>vue2入门</h2>
     <img src="@/assets/logo.png" alt="logo" />
-    <h1>欢迎学习vue2</h1>
   </div>
 </template>
 
@@ -12,6 +11,7 @@ export default {
   data() {
     return {};
   },
+
   // 组件内路由守卫（只对该组件生效）
 
   // 通过路由规则，进入该组件时(进入前一刻)被调用
