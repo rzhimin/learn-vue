@@ -14,7 +14,7 @@
     </select>
     <button @click="increment(n)">+</button>
     <button @click="decrement(n)">-</button>
-    <button @click="incrementOdd(n)">当前求和为奇数再加</button>
+    <button @click="incrementOdd(n)">当前求和为奇数则加</button>
     <button @click="incrementWait(n)">等一等再加</button>
   </div>
 </template>
