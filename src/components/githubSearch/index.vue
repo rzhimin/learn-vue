@@ -1,16 +1,16 @@
 <template>
-    <div class="container">
-        <Search />
-        <List />
-    </div>
+  <div class="container">
+    <Search />
+    <List />
+  </div>
 </template>
 
 <script>
-import Search from './components/Search';
-import List from './components/List';
+import Search from "./components/Search";
+import List from "./components/List";
 
 export default {
-    name: 'githubSearch',
-    components: { Search, List }
+  name: "githubSearch",
+  components: { Search, List },
 };
 </script>

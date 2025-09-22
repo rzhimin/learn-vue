@@ -34,11 +34,61 @@
         >
           动画测试
         </router-link>
-        <router-link class="list-group-item" active-class="active" to="/home">
-          主页
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/slotsText"
+        >
+          slot插槽
         </router-link>
-        <router-link class="list-group-item" active-class="active" to="/test2">
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/vonText"
+        >
+          v-on="$listeners
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/vuexText"
+        >
+          vuex测试
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/routerText"
+        >
+          路由测试
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/storage"
+        >
+          浏览器缓存测试
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/githubSearch"
+        >
+          github搜索
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/elementui"
+        >
           elementUI示例
+        </router-link>
+        <router-link
+          class="list-group-item"
+          active-class="active"
+          to="/todoList"
+        >
+          todoList
         </router-link>
         <router-link
           class="list-group-item"

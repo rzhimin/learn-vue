@@ -2,9 +2,9 @@
   <div>
     <!-- 在模板中可以直接访问 vm vc 的值所以不用在前面加上 this -->
     <!-- 获取 State 值 -->
-    <h1>当前求和为：{{ $store.state.sum }}</h1>
+    <h1>当前求和为：{{ $store.state.count.sum }}</h1>
     <!-- 获取 Getters 值 -->
-    <h3>当前求和放大10倍为：{{ $store.getters.bigSum }}</h3>
+    <h3>当前求和放大10倍为：{{ $store.getters['count/bigSum'] }}</h3>
     <h3>我在{{ school }}，学习{{ subject }}</h3>
     <h3 style="color: red">Person组件的总人数是：{{ personList.length }}</h3>
     <select v-model.number="n">
@@ -12,10 +12,10 @@
       <option value="2">2</option>
       <option value="3">3</option>
     </select>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
-    <button @click="incrementOdd">当前求和为奇数再加</button>
-    <button @click="incrementWait">等一等再加</button>
+    <button @click="increment(n)">+</button>
+    <button @click="decrement(n)">-</button>
+    <button @click="incrementOdd(n)">当前求和为奇数再加</button>
+    <button @click="incrementWait(n)">等一等再加</button>
   </div>
 </template>
 
@@ -40,10 +40,10 @@ export default {
     // 借助 mapGetters 生成计算属性：bigSum（数组写法）
     // ...mapGetters(["bigSum"]),
 
-     //  在之前的基础上，要指定名称(模块化写法)
-    ...mapState('countAbout', ['sum', 'school', 'subject']),
-    ...mapState('personAbout', ['personList']),
-    ...mapGetters('countAbout', ['bigSum'])
+    //  在之前的基础上，要指定名称(模块化写法)
+    ...mapState("count", ["sum", "school", "subject"]),
+    ...mapState("person", ["personList"]),
+    ...mapGetters("count", ["bigSum"]),
   },
   methods: {
     // 程序员亲自写方法
@@ -85,8 +85,11 @@ export default {
     // ...mapActions(['jiaOdd','jiaWait'])
 
     // 在之前的基础上，要指定名称(模块化写法)
-    ...mapMutations('countAbout', { increment: 'JIA', decrement: 'JIAN' }),
-    ...mapActions('countAbout', { incrementOdd: 'jiaOdd', incrementWait: 'jiaWait' })
+    ...mapMutations("count", { increment: "JIA", decrement: "JIAN" }),
+    ...mapActions("count", {
+      incrementOdd: "jiaOdd",
+      incrementWait: "jiaWait",
+    }),
   },
   mounted() {
     // this 上会出现 $store

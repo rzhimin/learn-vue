@@ -1,134 +1,63 @@
 <template>
-  <div>
-    <div class="container1">
-      <Category title="空"></Category>
-      <Category title="美食">
-        <!-- 默认插槽：向组件内嵌套下级结构（父 ===> 子）-->
-        <img src="https://s3.ax1x.com/2021/01/16/srJlq0.jpg" alt="" />
-        <!-- 具名插槽：在组件使用者身上用 slot 指定插槽名称 -->
-        <img
-          slot="center"
-          src="https://s3.ax1x.com/2021/01/16/srJlq0.jpg"
-          alt=""
-        />
-        <a slot="footer" href="http://www.atguigu.com">更多美食</a>
-      </Category>
+  <div class="parent-wrapper">
+    <h2>父组件：我来填坑</h2>
 
-      <Category title="游戏">
-        <!-- 默认插槽：向组件内嵌套下级结构（父 ===> 子）-->
-        <ul>
-          <li v-for="(g, index) in games" :key="index">{{ g }}</li>
-        </ul>
-        <!-- 具名插槽：在组件使用者身上用 slot 指定插槽名称 -->
-        <ul slot="center">
-          <li v-for="(g, index) in games" :key="index">{{ g }}x</li>
-        </ul>
-        <div class="foot" slot="footer">
-          <a href="http://www.atguigu.com">单机游戏</a>
-          <a href="http://www.atguigu.com">网络游戏</a>
+    <!-- 引入子组件 -->
+    <ChildSlots>
+      <!-- 1. 填“默认插槽” -->
+      <!-- 语法糖：template 不写 v-slot 默认就是 default -->
+      <template>
+        <p style="color:royalblue">👋 父组件覆盖了默认插槽</p>
+      </template>
+
+      <!-- 2. 填“header”具名插槽 -->
+      <!-- v-slot:header 可简写为 #header -->
+      <template #header>
+        <h3 style="color:orangered">✏️ 父组件定义的 header</h3>
+      </template>
+
+      <!-- 3. 填“body”作用域插槽 -->
+      <!-- 通过解构拿到子组件抛出的 user 和 counter -->
+      <template #body="{ user, counter }">
+        <div style="background:#f5f5f5;padding:8px">
+          <p>👇 下面数据来自子组件，样式来自父组件</p>
+          <p>用户：{{ user.name }} —— 年龄：{{ user.age }}</p>
+          <p>计数器：{{ counter }}</p>
+          <!-- 父组件里可直接修改子组件数据（通过事件） -->
+          <button @click="add(user)">父组件按钮：年龄+1</button>
         </div>
-        <!--
-                    注意：这里是可以将多个标签指定为同一个插槽名称的，并不会覆盖，而是会把具有同一个插槽名称的结构都放入目标插槽中
-                    但是，还是建议将需要放入同一个插槽中的结构部分用一个根标签包裹，统一设置插槽名称
-                        1、使用 div 包裹
-                            （不推荐：破坏了结构）
-                            指定插槽名称：slot="插槽名"
-                        2、使用 template 包裹
-                            （优先推荐）
-                            指定插槽名称：slot="插槽名" 或 v-slot:插槽名
-    
-                    注意！！！！在 Vue 2.6.0 之后，已经废弃了 slot 写法，请一律使用 template 的 v-slot 写法！！！！
-                -->
-      </Category>
+      </template>
 
-      <Category title="电影">
-        <!-- 默认插槽：向组件内嵌套下级结构（父 ===> 子）-->
-        <video
-          controls
-          src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
-        ></video>
-        <!-- 具名插槽：在组件使用者身上用 slot 指定插槽名称 -->
-        <video
-          slot="center"
-          controls
-          src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
-        ></video>
-        <template v-slot:footer>
-          <div class="foot">
-            <a href="http://www.atguigu.com">经典</a>
-            <a href="http://www.atguigu.com">热门</a>
-            <a href="http://www.atguigu.com">推荐</a>
-          </div>
-          <h4>欢迎前来观影</h4>
-        </template>
-      </Category>
-
-      <!-- 由于向组件传递的 html 结构部分是先在调用者身上解析好了，再传递给组件，所以我们的样式通常是可以写到调用者身上的 -->
-    </div>
-    <!-- 作用域插槽：数据放在在组件的自身上，但根据数据生成的结构需要组件的使用者来决定，这种情况下需要使用作用域插槽 -->
-    <!--（games 数据在 Category 组件中，但使用数据所遍历出来的结构由 App 组件决定）-->
-    <div class="container2">
-      <Category title="游戏">
-        <!-- 指定了 v-slot 的 template 就能使用作用域插槽 -->
-        <!-- 必须给 v-slot 指定一个变量，该变量能够接收作用域插槽中传递过来的值 -->
-        <!--（说明：之前作用域插槽使用 slot-scope，但是 Vue2.6.0 之后就改为 v-slot 了）-->
-        <template v-slot="games01">
-          <ul>
-            <li v-for="(g, index) in games01.games" :key="index">{{ g }}</li>
-          </ul>
-          <h4>{{ games01.msg }}</h4>
-        </template>
-      </Category>
-
-      <Category title="游戏">
-        <!-- 可以使用解构赋值的形式接收 -->
-        <template v-slot="{ games }">
-          <ol>
-            <li v-for="(g, index) in games" :key="index">{{ g }}</li>
-          </ol>
-        </template>
-      </Category>
-
-      <Category title="游戏">
-        <!-- 可以使用解构赋值的形式接收 -->
-        <template v-slot="{ games, msg }">
-          <h4 v-for="(g, index) in games" :key="index">{{ g }}</h4>
-          <h4>{{ msg }}</h4>
-        </template>
-      </Category>
-
-      <!--
-        一些例子：
-        v-slot:demo="slotProps"：既是名为 demo 的具名插槽，还是作用域插槽
-        v-slot:default="slotProps"：既是默认插槽（默认插槽，隐含的名字“default”），还是作用域插槽
-         -->
-    </div>
+      <!-- 4. 填“footer”作用域插槽 -->
+      <!-- 只拿 version，演示可单独拿部分数据 -->
+      <template #footer="{ version }">
+        <footer style="text-align:right;color:#999">
+          当前 Vue 版本 —— v{{ version }}
+        </footer>
+      </template>
+    </ChildSlots>
   </div>
 </template>
 
 <script>
-import Category from './components/Category'
+import ChildSlots from './ChildSlots.vue'
 
 export default {
-  name: 'slotsText',
-  components: { Category },
-  data() {
-    return {
-      foods: ['火锅', '烧烤', '小龙虾', '牛排'],
-      games: ['红色警戒', '穿越火线', '劲舞团', '超级玛丽'],
-      films: ['《教父》', '《拆弹专家》', '《你好，李焕英》', '《尚硅谷》'],
+  name: 'ParentSlots',
+  components: { ChildSlots },
+  methods: {
+    // 父组件想改子组件数据？标准做法：$emit 事件（本文聚焦插槽，故直接改引用）
+    // 这里只是为了演示“父拿到子数据后还能玩它”
+    add(user) {
+      user.age += 1
     }
-  },
+  }
 }
 </script>
 
 <style scoped>
-.container1,
-.container2 {
-  display: flex;
-  justify-content: space-between;
-}
-.container2 {
-  padding-top: 300px;
+.parent-wrapper {
+  max-width: 600px;
+  margin: 20px auto;
 }
 </style>

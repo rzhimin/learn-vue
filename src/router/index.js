@@ -3,14 +3,20 @@ import VueRouter from "vue-router";
 
 // 引入组件
 import About from "@/views/About";
-import Home from "@/views/Home";
-import News from "@/views/News";
-import Message from "@/views/Message";
-import Detail from "@/views/Detail";
 import Base from "@/views/Base";
 import ProxyTest from "@/views/ProxyTest";
 import MyAnimate from "@/components/myAnimate";
-import Test2 from "@/views/Test2";
+import SlotsText from "@/components/slotsText";
+import VonText from "@/components/vonText";
+import VuexText from "@/components/vuexText";
+import RouterText from "@/components/routerText";
+import Storage from "@/components/storage";
+import GithubSearch from "@/components/githubSearch";
+import TodoList from "@/components/todoList";
+import News from "@/components/routerText/News";
+import Message from "@/components/routerText/Message";
+import Detail from "@/components/routerText/Detail";
+import Elementui from "@/views/Elementui";
 import ValidateTest from "@/views/ValidateTest";
 import Login from "@/views/Login";
 
@@ -48,8 +54,8 @@ const router = new VueRouter({
     },
     {
       name: "zhuye",
-      path: "/home",
-      component: Home,
+      path: "/routerText",
+      component: RouterText,
       meta: { title: "主页" },
       children: [
         {
@@ -143,8 +149,32 @@ const router = new VueRouter({
       component: MyAnimate,
     },
     {
-      path: "/test2",
-      component: Test2,
+      path: "/slotsText",
+      component: SlotsText,
+    },
+    {
+      path: "/vonText",
+      component: VonText,
+    },
+    {
+      path: "/vuexText",
+      component: VuexText,
+    },
+    {
+      path: "/storage",
+      component: Storage,
+    },
+    {
+      path: "/githubSearch",
+      component: GithubSearch,
+    },
+    {
+      path: "/todoList",
+      component: TodoList,
+    },
+    {
+      path: "/elementui",
+      component: Elementui,
     },
     {
       path: "/validateTest",

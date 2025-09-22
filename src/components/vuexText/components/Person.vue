@@ -27,33 +27,33 @@ export default {
     personList() {
       // return this.$store.state.personList;
       // 在之前的基础上，要指定名称(模块化)
-      return this.$store.state.personAbout.personList;
+      return this.$store.state.person.personList;
     },
     sum() {
       // return this.$store.state.sum;
       // 在之前的基础上，要指定名称(模块化)
-      return this.$store.state.countAbout.sum;
+      return this.$store.state.count.sum;
     },
     // 在之前的基础上，要指定名称
     firstPersonName() {
-      return this.$store.getters["personAbout/firstPersonName"];
+      return this.$store.getters["person/firstPersonName"];
     },
   },
   methods: {
     add() {
       const personObj = { id: nanoid(), name: this.name };
-      this.$store.commit("ADD_PERSON", personObj);
+      this.$store.commit("person/ADD_PERSON", personObj);
       this.name = "";
     },
     addWang() {
       const personObj = { id: nanoid(), name: this.name };
       // 在之前的基础上，要指定名称
-      this.$store.dispatch("personAbout/addPersonWang", personObj);
+      this.$store.dispatch("person/addPersonWang", personObj);
       this.name = "";
     },
     addPersonServer() {
       // 在之前的基础上，要指定名称
-      this.$store.dispatch("personAbout/addPersonServer");
+      this.$store.dispatch("person/addPersonServer");
     },
   },
 };

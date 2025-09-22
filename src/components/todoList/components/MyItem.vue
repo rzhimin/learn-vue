@@ -9,7 +9,14 @@
       />
       <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，直接修改了 props -->
       <!-- <input type="checkbox" v-model="todo.done"/> -->
-      <span>{{ todo.title }}</span>
+      <span v-show="!todo.isEdit">{{ todo.title }}</span>
+      <input
+        v-show="todo.isEdit"
+        :value="todo.title"
+        @blur="handleBlur(todo, $event)"
+        @keyup.enter="handleBlur(todo, $event)"
+        ref="inputTitle"
+      />
     </label>
     <!-- 注意：delete 是 js 关键字，不要作为方法名 -->
     <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
@@ -63,8 +70,9 @@ export default {
     // 失去焦点执行修改逻辑
     handleBlur(todo, e) {
       todo.isEdit = false;
-      if (!e.target.value.trim()) return alert("输入不能为空！");
-      this.$bus.$emit("updateTodo", todo.id, e.target.value);
+      const newTitle = e.target.value.trim();
+      if (!newTitle) return alert("输入不能为空！");
+      this.$bus.$emit("updateTodo", todo.id, newTitle);
     },
   },
 };
@@ -80,7 +88,6 @@ li {
 }
 
 li label {
-  float: left;
   cursor: pointer;
 }
 

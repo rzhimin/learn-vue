@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>主页内容</h2>
+    <h2>路由测试</h2>
     <div>
       <ul class="nav nav-tabs">
         <!--
@@ -17,7 +17,7 @@
           <router-link
             class="list-group-item"
             active-class="active"
-            to="/home/news"
+            to="/routerText/news"
           >
             新闻
           </router-link>
@@ -26,7 +26,7 @@
           <router-link
             class="list-group-item"
             active-class="active"
-            to="/home/message"
+            to="/routerText/message"
           >
             消息
           </router-link>
@@ -49,6 +49,6 @@
 
 <script>
 export default {
-  name: "Home",
+  name: "RouterText",
 };
 </script>

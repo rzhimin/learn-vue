@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "Test2",
+  name: "Elementui",
   components: {},
   data() {
     return {};
